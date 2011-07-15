@@ -1,11 +1,15 @@
 package me.KillerSmurf.LavaBoat;
 
+import org.bukkit.Material;
 import org.bukkit.craftbukkit.entity.CraftBoat;
+import org.bukkit.entity.Boat;
 import org.bukkit.entity.Player;
 import org.bukkit.event.vehicle.VehicleDamageEvent;
 import org.bukkit.event.vehicle.VehicleEnterEvent;
 import org.bukkit.event.vehicle.VehicleExitEvent;
 import org.bukkit.event.vehicle.VehicleListener;
+import org.bukkit.event.vehicle.VehicleMoveEvent;
+import org.bukkit.util.Vector;
 
 public class LBVL extends VehicleListener {
 	LavaBoat lb;
@@ -43,6 +47,22 @@ public class LBVL extends VehicleListener {
 				}
 			};
 			lb.getServer().getScheduler().scheduleSyncDelayedTask(lb, runnable, 5*20);
+		}
+	}
+	public void onVehicleMove(VehicleMoveEvent e)
+	{
+		
+		if(e.getVehicle() instanceof Boat)
+		{
+			Vector vect=e.getVehicle().getVelocity();
+			int y=0;
+			Material mat=e.getVehicle().getLocation().getWorld().getBlockAt(e.getVehicle().getLocation()).getType();
+			if(mat==Material.LAVA||mat==Material.STATIONARY_LAVA)
+			{
+				y=1;
+			}
+			lb.getServer().broadcastMessage("boat is moving");
+			e.getVehicle().setVelocity(new Vector(vect.getX(),y,vect.getZ()));
 		}
 	}
 }
