@@ -61,7 +61,7 @@ public class LBVL extends VehicleListener {
 			{
 				y=1;
 			}
-			lb.getServer().broadcastMessage("boat is moving");
+			//lb.getServer().broadcastMessage("boat is moving"); this was used for testing
 			e.getVehicle().setVelocity(new Vector(vect.getX(),y,vect.getZ()));
 		}
 	}
