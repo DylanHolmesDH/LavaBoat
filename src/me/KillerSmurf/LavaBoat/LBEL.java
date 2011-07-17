@@ -14,13 +14,25 @@ public class LBEL extends EntityListener {
 	}
 	
 	public void onEntityCombust(EntityCombustEvent event) {
-		if (!(event.getEntity() instanceof Boat)) return;
-		event.setCancelled(true);
+		if (event.getEntity() instanceof Boat)
+		{
+			event.setCancelled(true);
+		}	
+		if(event.getEntity() instanceof Player)
+		{
+			Player player=(Player) event.getEntity();
+			if(player.getVehicle() instanceof Boat&&lb.boats.contains(player.getVehicle()))
+			{			
+				event.setCancelled(true);
+				player.setFireTicks(0);
+			}
+		}
 	}
 	
 	public void onEntityDamage(EntityDamageEvent event) {
 		if (!(event.getEntity() instanceof Player)) return;
-		if (lb.ISINBOAT) {
+		Player player=(Player)event.getEntity();
+		if (player.getVehicle() instanceof Boat&&lb.boats.contains(player.getVehicle())) {
 			event.setCancelled(true);
 		}
 	}

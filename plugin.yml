@@ -1,3 +1,7 @@
 name: LavaBoat
 main: me.KillerSmurf.LavaBoat.LavaBoat
-version: 0.0.1
+version: 0.0.2
+commands:
+    lavaboat:
+        description: Make a boat Lava-proof
+        usage: /lavaboat
